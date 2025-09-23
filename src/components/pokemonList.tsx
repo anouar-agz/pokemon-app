@@ -1,6 +1,6 @@
 import { revalidatePath } from "next/cache";
 
-import { PokemonListClient } from "./pokemonListClient";
+import { PokemonListClient } from "@/components/pokemonListClient";
 
 export const PokemonList = async () => {
   // Simulate a slow backend so the stream effect is obvious

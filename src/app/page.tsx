@@ -43,14 +43,7 @@ export default function Home() {
         </div>
       </section>
 
-      <ToastContainer
-        position="bottom-left"
-        theme="dark"
-        toastClassName="relative overflow-hidden rounded-2xl border border-white/10 bg-slate-950/90 text-sm text-white shadow-[0_30px_90px_-45px_rgba(56,189,248,0.6)] backdrop-blur-xl"
-        progressClassName="bg-cyan-400"
-        closeButton={false}
-        icon={false}
-      />
+      <ToastContainer position="bottom-left" theme="dark" />
     </div>
   );
 }
