@@ -1,36 +1,45 @@
 import { revalidatePath } from "next/cache";
 
-import { PokemonListItem } from "@/components/pokemonListItem";
+import { PokemonListClient } from "./pokemonListClient";
 
 export const PokemonList = async () => {
   // Simulate a slow backend so the stream effect is obvious
   await new Promise((resolve) => setTimeout(resolve, 1500));
 
+  const addPokemon = async (newPokemon: string): Promise<void> => {
+    "use server";
+
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+
+    // throw new Error("Failed to add pokemon");
+
+    pokemonList = [newPokemon, ...pokemonList];
+
+    revalidatePath("/");
+  };
+
   const removePokemon = async (pokemonToRemove: string): Promise<void> => {
     "use server";
 
-    POKEMON_LIST = POKEMON_LIST.filter(
-      (pokemon) => pokemon !== pokemonToRemove
-    );
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+
+    pokemonList = pokemonList.filter((pokemon) => pokemon !== pokemonToRemove);
+
+    // throw new Error("Failed to remove pokemon");
 
     revalidatePath("/");
   };
 
   return (
-    <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-      {POKEMON_LIST.map((pokemon: string, index: number) => (
-        <PokemonListItem
-          key={pokemon}
-          name={pokemon}
-          index={index}
-          removePokemon={removePokemon}
-        />
-      ))}
-    </ul>
+    <PokemonListClient
+      pokemonList={pokemonList}
+      addPokemon={addPokemon}
+      removePokemon={removePokemon}
+    />
   );
 };
 
-let POKEMON_LIST = [
+let pokemonList = [
   "bulbasaur",
   "ivysaur",
   "venusaur",

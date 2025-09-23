@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import { ToastContainer } from "react-toastify";
 
 import { PokemonList } from "@/components/pokemonList";
 import { PokemonListSkeleton } from "@/components/pokemonSkeleton";
@@ -41,6 +42,15 @@ export default function Home() {
           </Suspense>
         </div>
       </section>
+
+      <ToastContainer
+        position="bottom-left"
+        theme="dark"
+        toastClassName="relative overflow-hidden rounded-2xl border border-white/10 bg-slate-950/90 text-sm text-white shadow-[0_30px_90px_-45px_rgba(56,189,248,0.6)] backdrop-blur-xl"
+        progressClassName="bg-cyan-400"
+        closeButton={false}
+        icon={false}
+      />
     </div>
   );
 }

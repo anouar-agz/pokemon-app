@@ -9,7 +9,9 @@ export default function AboutPage() {
         <p className="text-xs uppercase tracking-[0.35em] text-cyan-200/80">
           About
         </p>
-        <h1 className="mt-3 text-4xl font-semibold text-white">Why this demo?</h1>
+        <h1 className="mt-3 text-4xl font-semibold text-white">
+          Why this demo?
+        </h1>
       </div>
 
       <p className="text-base text-white/70">

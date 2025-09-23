@@ -1,8 +1,9 @@
 "use client";
 
-import { startTransition, useActionState } from "react";
+import { startTransition, useActionState, useOptimistic } from "react";
 
 import { formatPokemonName } from "@/utils/formatPokemonName";
+import { toast } from "react-toastify";
 
 export const PokemonListItem = ({
   name,
@@ -13,10 +14,13 @@ export const PokemonListItem = ({
   index: number;
   removePokemon: (pokemon: string) => Promise<void>;
 }) => {
-  const [_, removePokemonAction, isPending] = useActionState(
-    () => removePokemon(name),
-    undefined
-  );
+  const [_, removePokemonAction, isPending] = useActionState(async () => {
+    try {
+      await removePokemon(name);
+    } catch (error) {
+      toast.error("Failed to remove pokemon");
+    }
+  }, undefined);
 
   return (
     <li
