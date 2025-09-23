@@ -25,16 +25,16 @@ export const PokemonListClient = ({
   return (
     <div className="space-y-8">
       <PokemonAddForm
-        onSubmit={(name) => {
-          startTransition(async () => {
+        onSubmit={async (name) => {
+          startTransition(() => {
             addPokemonOptimistic(name);
-
-            try {
-              await addPokemon(name);
-            } catch (error) {
-              toast.error("Failed to add pokemon");
-            }
           });
+
+          try {
+            await addPokemon(name);
+          } catch (error) {
+            toast.error("Failed to add pokemon");
+          }
         }}
       />
 
