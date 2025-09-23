@@ -1,12 +1,23 @@
+"use client";
+
+import { startTransition, useActionState } from "react";
+
 import { formatPokemonName } from "@/utils/formatPokemonName";
 
 export const PokemonListItem = ({
   name,
   index,
+  removePokemon,
 }: {
   name: string;
   index: number;
+  removePokemon: (pokemon: string) => Promise<void>;
 }) => {
+  const [_, removePokemonAction, isPending] = useActionState(
+    () => removePokemon(name),
+    undefined
+  );
+
   return (
     <li
       key={name}
@@ -19,12 +30,22 @@ export const PokemonListItem = ({
       <p className="text-xs uppercase tracking-[0.3em] text-white/40">
         Pokémon
       </p>
+
       <p className="mt-4 text-xl font-semibold text-white">
         {formatPokemonName(name)}
       </p>
+
       <p className="mt-2 text-sm text-white/60">
         {`Entry #${index + 1} in this demo list.`}
       </p>
+
+      <button
+        className="mt-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/60 hover:bg-white/10"
+        onClick={() => startTransition(removePokemonAction)}
+        disabled={isPending}
+      >
+        {isPending ? "Removing..." : "Remove"}
+      </button>
     </li>
   );
 };
