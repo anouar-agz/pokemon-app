@@ -8,7 +8,13 @@ If you don't have Bun, [install](https://bun.com/docs/installation) it using:
 brew install oven-sh/bun/bun # for macOS and Linux
 ```
 
-Then, run the development server:
+Then, do bun install to install dependencies:
+
+```bash
+bun install
+```
+
+Then run the development server:
 
 ```bash
 bun dev
